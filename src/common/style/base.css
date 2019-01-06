@@ -50,7 +50,7 @@
  }
  /* custom */
  a {
-    color: #7e8c8d;
+   color:rgb(240, 36, 36);
     text-decoration: none;
     -webkit-backface-visibility: hidden;
  }
@@ -87,6 +87,7 @@
  html, body,#root{
     width: 100%;
     height:100%;
+    background-color:#f5f5f5;
  }
  
  body {

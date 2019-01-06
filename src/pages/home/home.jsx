@@ -1,23 +1,21 @@
 import React,{Component} from 'react';
 import './home.less'
-import logo from './../logo.svg';
-import { Link } from 'react-router-dom';
 
+import { Route  } from 'react-router-dom';
+import Header from '../../components/header/header'
+import Footer from '../../components/footer/footer'
+import Index from './subPages/index/index'
+import user from './subPages/user/user'
 class Home extends Component{
   render(){
     return(
-      <div className="Home-container">
-        <div className="Home-wrapper">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-          Welcome to use create-react-app
-          <br />
-          subitem：react-model-mobile
-          <br />
-          author：Anles
-          </p>
-          <Link to="/user">前往user组件</Link>
-        </div>
+      <div className="home-container">
+        <Header></Header>
+        <main className="home-content">
+          <Route exact path="/home" component={Index}></Route>
+          <Route path="/home/user" component={user}></Route>
+        </main>
+        <Footer></Footer>
       </div>
     )
   }

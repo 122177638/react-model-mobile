@@ -1,14 +1,14 @@
 import React,{Component} from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './footer.less'
 class Footer extends Component{
   render(){
     return(
-      <footer className="App-footer">
+      <footer className="home-footer">
         <div className="footer-wrap">
           <ul className="nav-list">
-            <li className="nav-item"><Link to="/">home</Link></li>
-            <li className="nav-item"><Link to="/user">user</Link></li>  
+            <li className="nav-item"><NavLink className="nav-link" exact to="/home">home</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/home/user">user</NavLink></li>  
           </ul>
         </div>
       </footer>
