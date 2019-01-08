@@ -1,6 +1,11 @@
+export default methods => {
+    return target => {
+        Object.assign(target.prototype, methods);
+    }
+}
 /**
- * 
- * @param {Element} el 需要开启touchmove的事件
+ * 开启接触touchmove默认事件
+ * @param {Element} el 
  */
 export const openScroll = function (el) {
   el.addEventListener('touchstart', function () {
@@ -17,3 +22,4 @@ export const openScroll = function (el) {
     if (el.offsetHeight < el.scrollHeight) { evt._isScroller = true }
   }, {passive: true})
 };
+
