@@ -23,6 +23,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+
 const post2rem = require('postcss-px2rem');
 
 
@@ -137,6 +138,8 @@ module.exports = function(webpackEnv) {
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
+      'babel-polyfill', 
+      'react-hot-loader/patch', 
       // Include an alternative client for WebpackDevServer. A client's job is to
       // connect to WebpackDevServer by a socket and get notified about changes.
       // When you save a file, the client will either apply hot updates (in case
@@ -277,7 +280,7 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
-        '@': path.join(__dirname, '..', 'src')
+        '@': paths.appSrc
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

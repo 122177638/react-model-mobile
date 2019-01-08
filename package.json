@@ -5,6 +5,8 @@
   "dependencies": {
     "@babel/core": "7.1.6",
     "@svgr/webpack": "2.4.1",
+    "antd-mobile": "^2.2.8",
+    "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
@@ -29,6 +31,7 @@
     "fs-extra": "7.0.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
+    "immutable": "^4.0.0-rc.12",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
@@ -43,7 +46,10 @@
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.0",
     "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
@@ -115,11 +121,25 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "react-hot-loader/babel",
+      [
+        "import",
+        {
+          "libraryName": "antd-mobile",
+          "style": "css"
+        }
+      ]
     ]
   },
   "devDependencies": {
+    "babel-plugin-import": "^1.11.0",
+    "babel-polyfill": "^6.26.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "postcss-px2rem": "^0.3.0"
+    "postcss-px2rem": "^0.3.0",
+    "react-hot-loader": "^4.6.3",
+    "redux-devtools": "^3.5.0"
   }
 }

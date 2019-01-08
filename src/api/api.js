@@ -1,17 +1,17 @@
-import axios from './axios';
+import Axios from './axios';
 
-class Api extends axios{
+class Api extends Axios{
     async uploadImg(params = {}){
         try{
-          let result = await this.axios('post', '/Home/Humanjb/imgSave', params); 
-          if(result && result.status === 1){
+          let result = await this.axios('get', '/Home-InterfaceMr-characterZW', params); 
+          if(result){
             return result;
           }else{
             let err = {
-              tip: '上传图片失败',
+              tip: '获取信息失败',
               response: result,
               data: params,
-              url: '/Home/Humanjb/imgSave',
+              url: '/Home-InterfaceMr-characterZW',
             }
             throw err;
           }

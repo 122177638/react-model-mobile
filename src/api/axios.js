@@ -1,70 +1,46 @@
-import axios from 'axios'
-import qs from 'qs'
-import envconfig from '../envconfig/envconfig'
-// axios配置
-axios.defaults.timeout = 10000;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.baseURL = envconfig.baseURL;
-// axios.defaults.withCredentials = true 跨域发送cookie
+import axios from 'axios';
+import qs from 'qs';
+import envconfig from '../envconfig/envconfig';
+import { Toast } from 'antd-mobile' ;
 
 // 发起请求前
 axios.interceptors.request.use((config) => {
-//   Vue.$vux.loading.show({
-//     text: '加载中...'
-//   })
-  if (config.method === 'post') {
+  Toast.loading('Loading...', 0)
+  if (config.method.toUpperCase() === 'POST') {
     config.data = qs.stringify(config.data)
   }
-  return config
+  return config;
 }, (error) => {
-//   Vue.$vux.toast.show({
-//     text: '加载超时',
-//     type: 'warn'
-//   })
+  Toast.offline('请求超时', 3)
   return Promise.reject(error)
 })
 // 发起请求后
 axios.interceptors.response.use((res) => {
-//   Vue.$vux.loading.hide();
-  return res
+  Toast.hide();
+  return res;
 }, (error) => {
-  console.log('好多人在访问呀，请重新试试[timeout]')
-//   Vue.$vux.loading.hide();
+  console.log('好多人在访问呀，请重新试试')
   if (error) {
-    let errortime = null
-    clearTimeout(errortime)
-    errortime = setTimeout(() => {
-    //   Vue.$vux.toast.show({
-    //     text: '加载失败',
-    //     type: 'cancel'
-    //   })
-      clearTimeout(errortime)
-    }, 0)
+    Toast.fail('请求失败,请重试', 3)
   }
   return Promise.reject(error)
 })
 
-export default class server{
-  axios(method, url, params){
+export default class Axios{
+  axios(method, url, params,config){
     return new Promise((resolve, reject) => {
       if(typeof params !== 'object') params = {};
-      let _option = params;
-      _option = {
+      let _option = Object.assign({
         method,
         url,
         baseURL: envconfig.baseURL,
         timeout: 30000,
-        params: null,
-        data: null,
         headers: null,
-        withCredentials: true, //是否携带cookies发起请求
-        validateStatus:(status)=>{
-            return status >= 200 && status < 300;
-        },
-        ...params,
-      }
+        // withCredentials: true, //是否携带cookies发起请求  
+      },config)
+      method.toUpperCase() === 'POST'? _option.data =  params : _option.params = params;
       axios.request(_option).then(res => {
-        resolve(typeof res.data === 'object' ? res.data : JSON.parse(res.data))
+        resolve(res.data)
       },error => {
         if(error.response){
             reject(error.response.data)
