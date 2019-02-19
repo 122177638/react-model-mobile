@@ -46,6 +46,12 @@
         document.addEventListener('DOMContentLoaded', function() {
           FastClick.attach(document.body);
         }, false);
+        // 解决fastclick  input获取焦点Bug
+        FastClick.prototype.onTouchEnd = function(event) {
+          if(event.target.hasAttribute("type") && event.target.getAttribute("type") == "date"){
+            return false;
+          }
+        }
       }
       // 低版本支持promise
       if(!window.Promise) {
