@@ -1,36 +1,37 @@
-import React,{Component} from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import React, { Component } from "react";
+import PureRenderMixin from "react-addons-pure-render-mixin";
 
-import { Route  } from 'react-router-dom';
-import Header from '../../components/header/header'
-import Footer from '../../components/footer/footer'
-import Index from './subPages/index/index'
-import user from './subPages/user/user'
-import { openScroll } from '@/common/js/mixin'
-import './home.less'
+import { Route } from "react-router-dom";
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
+import Index from "./subPages/index/index";
+import user from "./subPages/user/user";
+import { openScroll } from "@/common/js/mixin";
+import "./home.less";
 
-
-class Home extends Component{
+class Home extends Component {
   constructor(props) {
     super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(
+      this
+    );
   }
-  componentDidMount(){
-    openScroll(this.refs.viewDom)
+  componentDidMount() {
+    openScroll(this.refs.viewDom);
   }
-  
-  render(){
-    return(
+
+  render() {
+    return (
       <div className="home-container">
-        <Header></Header>
+        <Header />
         <main className="home-content" ref="viewDom">
-          <Route exact path="/home" component={Index}></Route>
-          <Route path="/home/user" component={user}></Route>
+          <Route exact path="/home" component={Index} />
+          <Route path="/home/user" component={user} />
         </main>
-        <Footer></Footer>
+        <Footer />
       </div>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;
